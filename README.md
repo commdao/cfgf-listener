@@ -1,6 +1,8 @@
 # cfgf-listener
 "therapy bot", french canadian girlfriend style! 🇨🇦 🍁
 
+![preview](https://github.com/commdao/cfgf-listener/blob/main/media/fcgs-example-1.png)
+
 # ~ My French Canadian Girlfriend is Totally Real and Willing to Listen to All My Problems!!!
 * Hit the talk button, and talk about your problems
 * The code will listen in, and depending on your problem, speak back an appropriate (supporting) response
