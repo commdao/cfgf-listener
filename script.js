@@ -59,17 +59,24 @@ recognition.onresult = function(event) {
 const current = event.resultIndex;
 
 const transcript = event.results[current][0].transcript;
+let keywordFound = false;
 
 if (transcript.includes('embarrassed')) {
     playAudio('continue');
+    keywordFound = true;
 } else if (transcript.includes('cry')) {
     playAudio('cry');
-} else if (transcript.includes('what do you think')) {
-    playAudio('details');
+    keywordFound = true;
 } else if (transcript.includes('loser')) {
     playAudio('empathy');
+    keywordFound = true;
 } else if (transcript.includes('had the nerve')) {
     playAudio('shock');
+    keywordFound = true;
+}
+
+if (!keywordFound) {
+    playAudio('details'); // details audio for the temp "catch-all" response
 }
 
 // include limiter after 7 turns?
@@ -77,6 +84,12 @@ if (transcript.includes('embarrassed')) {
 content.textContent = transcript;
 };
 
+const listeningCue = new Audio('media/listening.mp3');
+// audio cue EVERY time is kind of anoying?
 tlkBtn.addEventListener('click', () => {
-recognition.start();
+    response.textContent = "*She's listening.*";
+    tlkBtn.style.backgroundColor = 'rebeccapurple';
+    tlkBtn.style.color = 'white';
+    listeningCue.play();
+    recognition.start();
 });

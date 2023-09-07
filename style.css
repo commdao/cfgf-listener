@@ -11,29 +11,35 @@ body {
     align-items: center;
 }
 
+span {
+    padding: .75rem;
+}
+
 .content {
     color: white;
-    height: 150px;
-    width: 600px;
-    background: rgba(127, 251, 19, 0.523);
+    height: 9.375rem;
+    width: 37.5rem;
+    background: #79b195;
     border: solid 2px white;
     margin: 2rem;
+    font-size: 1.75rem;
 }
 
 .response {
     color: white;
-    height: 150px;
-    width: 600px;
+    height: 9.375rem;
+    width: 37.5rem;
     background: rgba(102, 51, 153, 0.73);
     border: solid 1px white;
     margin: 2rem;
+    font-size: 1.75rem;
 }
 
 .talk {
-    background: gray;
-    color: white;
-    width: 100px;
-    height: 50px;
+    background: lightgrey;
+    color: rgba(102, 51, 153, 0.87);
+    width: 10rem;
+    height: 3.5rem;
     font-size: 2rem;
     text-transform: uppercase;
 }
