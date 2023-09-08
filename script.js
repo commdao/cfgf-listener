@@ -90,6 +90,6 @@ tlkBtn.addEventListener('click', () => {
     response.textContent = "*She's listening.*";
     tlkBtn.style.backgroundColor = 'rebeccapurple';
     tlkBtn.style.color = 'white';
-    listeningCue.play();
+    // listeningCue.play();
     recognition.start();
 });
