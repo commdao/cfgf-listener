@@ -17,6 +17,7 @@ const responsesText = {
 }
 
 let currentlyPlaying = null;
+let isListening = false;
 
 function playAudio(buttonId) {
     const audioSrc = responses[buttonId];
@@ -52,40 +53,52 @@ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecogni
 const recognition = new SpeechRecognition();
 
 recognition.onstart = function () {
-console.log("Tell me what's on your mind...");
+    console.log("Tell me what's on your mind...");
+    isListening = true;
+    startBlinking();
+};
+
+recognition.onend = function () {
+    isListening = false;
+    stopBlinking();
 };
 
 recognition.onresult = function(event) {
-const current = event.resultIndex;
+    const current = event.resultIndex;
 
-const transcript = event.results[current][0].transcript;
-let keywordFound = false;
+    const transcript = event.results[current][0].transcript;
+    let keywordFound = false;
 
-if (transcript.includes('embarrassed')) {
-    playAudio('continue');
-    keywordFound = true;
-} else if (transcript.includes('cry')) {
-    playAudio('cry');
-    keywordFound = true;
-} else if (transcript.includes('loser')) {
-    playAudio('empathy');
-    keywordFound = true;
-} else if (transcript.includes('had the nerve')) {
-    playAudio('shock');
-    keywordFound = true;
-}
-
-if (!keywordFound) {
-    playAudio('details'); // details audio for the temp "catch-all" response
-}
-
+    if (transcript.includes('embarrassed')) {
+        playAudio('continue');
+        keywordFound = true;
+    } else if (transcript.includes('cry')) {
+        playAudio('cry');
+        keywordFound = true;
+    } else if (transcript.includes('loser')) {
+        playAudio('empathy');
+        keywordFound = true;
+    } else if (transcript.includes('had the nerve')) {
+        playAudio('shock');
+        keywordFound = true;
+    }
+    if (!keywordFound) {
+        playAudio('details'); // details audio for the temp "catch-all" response
+    }
 // include limiter after 7 turns?
 
-content.textContent = transcript;
+    content.textContent = transcript;
 };
 
+function startBlinking() {
+    tlkBtn.classList.add('blink');
+};
+
+function stopBlinking() {
+    tlkBtn.classList.remove('blink');
+}
+
 const listeningCue = new Audio('media/listening.mp3');
-// audio cue EVERY time is kind of anoying?
 tlkBtn.addEventListener('click', () => {
     response.textContent = "*She's listening.*";
     tlkBtn.style.backgroundColor = 'rebeccapurple';
